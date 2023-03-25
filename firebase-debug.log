@@ -1,0 +1,22 @@
+[debug] [2023-03-25T13:12:49.297Z] ----------------------------------------------------------------------
+[debug] [2023-03-25T13:12:49.300Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Alexander Duboysky\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js open
+[debug] [2023-03-25T13:12:49.301Z] CLI Version:   11.25.1
+[debug] [2023-03-25T13:12:49.301Z] Platform:      win32
+[debug] [2023-03-25T13:12:49.301Z] Node Version:  v14.21.2
+[debug] [2023-03-25T13:12:49.302Z] Time:          Sat Mar 25 2023 16:12:49 GMT+0300 (Москва, стандартное время)
+[debug] [2023-03-25T13:12:49.302Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-03-25T13:12:49.392Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-03-25T13:12:49.392Z] > authorizing via signed-in user (alexander.duboysky@gmail.com)
+[debug] [2023-03-25T13:12:49.393Z] [iam] checking project diploma-9fd59 for permissions ["firebase.projects.get"]
+[debug] [2023-03-25T13:12:49.395Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/diploma-9fd59:testIamPermissions [none]
+[debug] [2023-03-25T13:12:49.395Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/diploma-9fd59:testIamPermissions x-goog-quota-user=projects/diploma-9fd59
+[debug] [2023-03-25T13:12:49.396Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/diploma-9fd59:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-03-25T13:12:50.237Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/diploma-9fd59:testIamPermissions 200
+[debug] [2023-03-25T13:12:50.237Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/diploma-9fd59:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-03-25T13:12:50.239Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/diploma-9fd59 [none]
+[debug] [2023-03-25T13:12:50.528Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/diploma-9fd59 200
+[debug] [2023-03-25T13:12:50.529Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/diploma-9fd59 {"projectId":"diploma-9fd59","projectNumber":"528794701195","displayName":"diploma","name":"projects/diploma-9fd59","resources":{"hostingSite":"diploma-9fd59","realtimeDatabaseInstance":"diploma-9fd59-default-rtdb"},"state":"ACTIVE","etag":"1_45fc7a7f-db57-40a0-89d6-8b6946ac91db"}
+[debug] [2023-03-25T13:12:50.529Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/diploma-9fd59 [none]
+[debug] [2023-03-25T13:12:50.807Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/diploma-9fd59 200
+[debug] [2023-03-25T13:12:50.807Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/diploma-9fd59 {"projectId":"diploma-9fd59","projectNumber":"528794701195","displayName":"diploma","name":"projects/diploma-9fd59","resources":{"hostingSite":"diploma-9fd59","realtimeDatabaseInstance":"diploma-9fd59-default-rtdb"},"state":"ACTIVE","etag":"1_45fc7a7f-db57-40a0-89d6-8b6946ac91db"}
