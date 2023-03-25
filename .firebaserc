@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "diploma-9fd59"
+  },
+  "targets": {
+    "diploma-9fd59": {
+      "hosting": {
+        "diploma": [
+          "diploma-9fd59"
+        ]
+      }
+    }
   }
 }
