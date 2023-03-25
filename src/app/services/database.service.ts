@@ -10,7 +10,7 @@ export class DatabaseService {
   constructor(private db: AngularFireDatabase) {}
 
   getItems() {
-    const ref = this.db.list('items')
+    const ref = this.db.list('courses')
     return ref.valueChanges()
   }
 }
