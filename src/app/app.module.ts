@@ -6,6 +6,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {CoreModule} from "./modules/core/core.module";
+import {CoursesModule} from "./modules/courses/courses.module";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,6 +16,9 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
   ],
   imports: [
     BrowserModule,
+    CoreModule,
+    CoursesModule,
+    FormsModule,
     AppRoutingModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),

@@ -1,0 +1,9 @@
+.header {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+
+  & .title {
+    font-size: 2rem;
+  }
+}
