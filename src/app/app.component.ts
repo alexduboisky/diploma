@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {DatabaseService} from "./services/database.service";
 
 @Component({
   selector: 'app-root',
@@ -7,11 +6,5 @@ import {DatabaseService} from "./services/database.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'diploma';
 
-  constructor(private db: DatabaseService) {
-    this.db.getItems().subscribe(data => {
-      console.log(data)
-    })
-  }
 }
