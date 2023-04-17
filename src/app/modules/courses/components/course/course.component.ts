@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Course} from "../../../../models/courses";
+import {DatabaseService} from "../../../../services/database.service";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-course',
@@ -15,4 +17,11 @@ export class CourseComponent {
     image: '',
   }
 
+  constructor(private db: DatabaseService, public authService: AuthService) {}
+
+  startCourse(id: number) {
+    this.db.getCourse(id).subscribe((data: Course[]) => {
+      console.log(data)
+    })
+  }
 }

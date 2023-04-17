@@ -1,11 +1,36 @@
-<div class="bg-primary text-white header">
-  <div class="p-2 d-flex align-items-center flex-column flex-sm-row justify-content-between w-100">
-    <div class="title d-flex justify-content-center align-items-center align-middle">
-      ОБУЧЕНИЕ
-    </div>
-    <div class="buttons d-flex flex-column flex-sm-row">
-      <div class="btn btn-light m-1" (click)="startStudy()">Начать обучение</div>
-      <div class="btn btn-light m-1" (click)="continueStudy()">Продолжить обучение</div>
+<nav class="navbar navbar-expand-md text-white navbar-dark bg-primary px-3">
+  <a class="navbar-brand text-white header-title" routerLink="">ОБУЧЕНИЕ</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="isMenuCollapsed = !isMenuCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+    <div class="d-flex align-items-center justify-content-between w-100 flex-column flex-md-row">
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" routerLinkActive="active-route">
+            <a class="nav-link text-white" routerLink="/courses">Курсы</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active-route">
+            <a class="nav-link text-white" routerLink="/about-us">О нас</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active-route">
+            <a class="nav-link text-white" routerLink="/contacts">Контакты</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="buttons d-flex flex-column flex-md-row">
+        <div class="btn btn-light m-1 btn-sm" (click)="startStudy()">Начать обучение</div>
+        <div class="btn btn-light m-1 btn-sm" (click)="continueStudy()">Продолжить обучение</div>
+      </div>
     </div>
   </div>
-</div>
+</nav>
+<!--<div class="bg-primary text-white header">-->
+<!--  <div class="p-2 d-flex align-items-center flex-column flex-sm-row justify-content-between w-100">-->
+<!--    <div class="title d-flex justify-content-center align-items-center align-middle">-->
+<!--      ОБУЧЕНИЕ-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

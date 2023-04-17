@@ -9,6 +9,7 @@ import {ContinueAuthModalComponent} from "../continue-auth-modal/continue-auth-m
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  isMenuCollapsed: boolean = true;
 
   constructor(public modalService: NgbModal) {}
 

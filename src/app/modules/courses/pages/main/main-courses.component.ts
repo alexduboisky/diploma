@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DatabaseService} from "../../../../services/database.service";
 import {Course} from "../../../../models/courses";
 
@@ -7,11 +7,13 @@ import {Course} from "../../../../models/courses";
   templateUrl: './main-courses.component.html',
   styleUrls: ['./main-courses.component.scss']
 })
-export class MainCoursesComponent {
+export class MainCoursesComponent implements OnInit{
 
   courses: Course[] = []
 
-  constructor(private db: DatabaseService) {
+  constructor(private db: DatabaseService) {}
+
+  ngOnInit() {
     this.db.getCourses().subscribe((data: Course[]) => {
       this.courses = data
     })

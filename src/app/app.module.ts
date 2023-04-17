@@ -15,6 +15,10 @@ import {StartAuthModalComponent} from "./components/start-auth-modal/start-auth-
 import {MainCoursesComponent} from "./modules/courses/pages/main/main-courses.component";
 import {MainCoreComponent} from "./modules/core/pages/main/main-core.component";
 import {CourseComponent} from "./modules/courses/components/course/course.component";
+import { AboutUsComponent } from './modules/core/pages/about-us/about-us.component';
+import { ContactsComponent } from './modules/core/pages/contacts/contacts.component';
+import {AuthService} from "./services/auth.service";
+import {AuthGuard} from "./guards/auth.guard";
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import {CourseComponent} from "./modules/courses/components/course/course.compon
     StartAuthModalComponent,
     MainCoursesComponent,
     MainCoreComponent,
-    CourseComponent
+    CourseComponent,
+    AboutUsComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,7 @@ import {CourseComponent} from "./modules/courses/components/course/course.compon
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
