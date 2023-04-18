@@ -16,12 +16,7 @@ export class DatabaseService {
   }
 
   getCourse(id: number): any {
-    // @ts-ignore
-    console.log(id)
     const ref = this.db.list('courses', ref => ref.orderByChild('id').equalTo(id))
-    // const course = ref.
-    // @ts-ignore
-    console.log(ref)
     return ref.valueChanges()
   }
 }
