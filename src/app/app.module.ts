@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FooterComponent} from "./components/footer/footer.component";
 import {ContinueAuthModalComponent} from "./components/continue-auth-modal/continue-auth-modal.component";
 import {HeaderComponent} from "./components/header/header.component";
@@ -40,7 +40,8 @@ import {AuthGuard} from "./guards/auth.guard";
     AppRoutingModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

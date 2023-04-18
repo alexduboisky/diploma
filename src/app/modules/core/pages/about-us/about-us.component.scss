@@ -1,7 +1,18 @@
 .background-image {
   background: url(~src/assets/images/aboutUs.png) no-repeat center center fixed;
+  background-size: cover;
 }
 
 .article {
   font-size: 1em;
+}
+
+.custom-width {
+  width: 75%;
+}
+
+@media (max-width: 800px) {
+  .custom-width {
+    width: 100%;
+  }
 }
