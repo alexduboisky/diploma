@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
+import {Admin} from "../../models/users";
+import md5 from 'md5'
 
 @Component({
   selector: 'app-teacher-auth-modal',
@@ -8,15 +12,31 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class TeacherAuthModalComponent {
 
-  username: string = ''
-  password: string = ''
+  f: FormGroup
+  isErrorMessageShowing: boolean = false;
 
   constructor(
-    public activeModal: NgbActiveModal
-  ) { }
+    public activeModal: NgbActiveModal,
+    private auth: AuthService
+  ) {
+    this.f = new FormGroup({
+      login: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    })
+  }
 
   submitData() {
-    this.activeModal.close({ username: this.username, password: this.password });
+    const hashedPassword = md5(this.f.controls['password'].value)
+    this.auth.loginAdmin(this.f.controls['login'].value).subscribe((admin: Admin[]) => {
+      if (!admin.length || admin[0].passwordHash !== hashedPassword) return this.showErrorMessage()
+      this.auth.setAdmin(admin[0])
+      this.activeModal.close();
+    })
+  }
+
+  showErrorMessage(): void {
+    this.isErrorMessageShowing = true
+    setTimeout(() => { this.isErrorMessageShowing = false }, 5000)
   }
 
   cancel() {

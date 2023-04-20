@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {StartAuthModalComponent} from "../start-auth-modal/start-auth-modal.component";
 import {ContinueAuthModalComponent} from "../continue-auth-modal/continue-auth-modal.component";
+import firebase from "firebase/compat";
+import auth = firebase.auth;
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,25 +13,19 @@ import {ContinueAuthModalComponent} from "../continue-auth-modal/continue-auth-m
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  isMenuCollapsed: boolean = true;
 
-  constructor(public modalService: NgbModal) {}
+  constructor(public modalService: NgbModal, public auth: AuthService, private router: Router) {}
 
   startStudy() {
-    const modalRef = this.modalService.open(StartAuthModalComponent)
-    modalRef.result.then((result) => {
-      if (result) {
-        console.log(result);
-      }
-    });
+    this.modalService.open(StartAuthModalComponent)
   }
 
   continueStudy() {
-    const modalRef = this.modalService.open(ContinueAuthModalComponent)
-    modalRef.result.then((result) => {
-      if (result) {
-        console.log(result);
-      }
-    });
+    this.modalService.open(ContinueAuthModalComponent)
+  }
+
+  logout() {
+    this.auth.logout()
+    this.router.navigate([''])
   }
 }

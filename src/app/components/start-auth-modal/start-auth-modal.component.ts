@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
+import {v4 as uuidv4} from 'uuid';
+import {User} from "../../models/users";
 
 @Component({
   selector: 'app-start-auth-modal',
@@ -9,15 +13,35 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 export class StartAuthModalComponent {
 
-  username: string = ''
-  password: string = ''
+  f: FormGroup
+  isErrorMessageShowing: boolean = false
 
   constructor(
-    public activeModal: NgbActiveModal
-  ) { }
+    public activeModal: NgbActiveModal,
+    private auth: AuthService
+  ) {
+    this.f = new FormGroup({
+      name: new FormControl('', Validators.required),
+      passCode: new FormControl('', Validators.required),
+    })
+  }
 
   submitData() {
-    this.activeModal.close({ username: this.username, password: this.password });
+    const data = {
+      id: uuidv4(),
+      name: this.f.controls['name'].value,
+      passCode: this.f.controls['passCode'].value
+    }
+    this.auth.registerUser(data).subscribe((user: User[]) => {
+      if (!user.length) return this.showErrorMessage()
+      this.auth.setUser(user[0])
+      this.activeModal.close();
+    })
+  }
+
+  showErrorMessage(): void {
+    this.isErrorMessageShowing = true
+    setTimeout(() => { this.isErrorMessageShowing = false }, 5000)
   }
 
   cancel() {

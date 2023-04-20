@@ -5,8 +5,9 @@
     </a>
 
     <div class="buttons d-flex flex-column flex-md-row">
-      <div class="btn btn btn-outline-dark m-1" (click)="startStudy()">Начать обучение</div>
-      <div class="btn btn btn-outline-dark m-1" (click)="continueStudy()">Продолжить обучение</div>
+      <div *ngIf="!auth.logged  && !auth.adminLogged" class="btn btn btn-outline-dark m-1" (click)="startStudy()">Начать обучение</div>
+      <div *ngIf="!auth.logged && !auth.adminLogged" class="btn btn btn-outline-dark m-1" (click)="continueStudy()">Продолжить обучение</div>
+      <div *ngIf="auth.logged || auth.adminLogged" class="btn btn btn-outline-dark m-1" (click)="logout()">Выйти из системы</div>
     </div>
   </div>
 </div>

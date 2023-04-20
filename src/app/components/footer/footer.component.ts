@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TeacherAuthModalComponent} from "../teacher-auth-modal/teacher-auth-modal.component";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-footer',
@@ -8,14 +9,9 @@ import {TeacherAuthModalComponent} from "../teacher-auth-modal/teacher-auth-moda
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  constructor(public modalService: NgbModal) {}
+  constructor(public modalService: NgbModal, public auth: AuthService,) {}
 
   openAuthModal() {
-    const modalRef = this.modalService.open(TeacherAuthModalComponent)
-    modalRef.result.then((result) => {
-      if (result) {
-        console.log(result);
-      }
-    });
+    this.modalService.open(TeacherAuthModalComponent)
   }
 }
