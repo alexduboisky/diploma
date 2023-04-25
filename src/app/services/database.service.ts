@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {Observable} from "rxjs";
-import {equalTo} from "@angular/fire/database";
-import {User} from "../models/users";
+import {equalTo, update} from "@angular/fire/database";
+import {User, UserCourseState} from "../models/users";
+import {CourseState} from "./course.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,49 @@ export class DatabaseService {
     return ref.valueChanges()
   }
 
-  getCourse(id: number): any {
+  getCourse(id: string): any {
     const ref = this.db.list('courses', ref => ref.orderByChild('id').equalTo(id))
     return ref.valueChanges()
+  }
+
+  addCourseToUser(userId: string, courseId: string, activeStep: string) {
+    const data: UserCourseState = {
+      id: courseId,
+      status: CourseState.IN_PROGRES,
+      activeStep
+    }
+    const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
+    ref.once('value')
+      .then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          childSnapshot.child('coursesState').ref.push(data)
+        })
+      })
+  }
+
+  updateCourseToUser(userId: string, courseId: string, activeStep: string, status: string) {
+    const data: UserCourseState = {
+      id: courseId,
+      status,
+      activeStep
+    }
+    const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
+    ref.once('value')
+      .then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          const corseRef = childSnapshot.ref.child('coursesState').ref.orderByChild('id').equalTo(courseId)
+          corseRef.once("value")
+            .then(snap => {
+              snap.forEach(childSnap => {
+                childSnap.ref.update(data)
+              })
+            })
+        })
+      })
+  }
+
+  finishCourseToUser(userId: string, courseId: string) {
+    this.updateCourseToUser(userId, courseId, null, CourseState.DONE)
   }
 
   registerUser(data: User) {

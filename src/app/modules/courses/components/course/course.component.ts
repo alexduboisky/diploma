@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Course} from "../../../../models/courses";
 import {DatabaseService} from "../../../../services/database.service";
 import {AuthService} from "../../../../services/auth.service";
+import {CourseState} from "../../../../services/course.service";
 
 @Component({
   selector: 'app-course',
@@ -11,7 +12,7 @@ import {AuthService} from "../../../../services/auth.service";
 export class CourseComponent {
 
   @Input() course: Course = {
-    id: 0,
+    id: '',
     title: '',
     description: '',
     image: '',
@@ -19,9 +20,9 @@ export class CourseComponent {
 
   constructor(private db: DatabaseService, public authService: AuthService) {}
 
-  startCourse(id: number) {
+  startCourse(id: string) {
     this.db.getCourse(id).subscribe((data: Course[]) => {
-      console.log(data)
+      this.db.addCourseToUser(this.authService.User.getValue().id, id, 'l1')
     })
   }
 }

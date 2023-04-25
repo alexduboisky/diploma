@@ -4,7 +4,7 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="f" (ngSubmit)="submitData()">
+    <form [formGroup]="f">
       <div class="mb-3">
         <label for="username">Как к Вам обращаться?</label>
         <div class="input-group">
@@ -27,7 +27,7 @@
 
   </div>
   <div class="modal-footer d-flex align-items-center justify-content-end">
-    <button type="submit"  [disabled]="f.invalid" class="btn btn-success mr-3">Войти</button>
+    <button (click)="submitData()"  [disabled]="f.invalid" class="btn btn-success mr-3">Войти</button>
     <button (click)="cancel()" class="btn btn-danger">Отменить</button>
   </div>
 </div>
