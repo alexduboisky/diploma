@@ -4,6 +4,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {v4 as uuidv4} from 'uuid';
 import {User} from "../../models/users";
+import {user} from "@angular/fire/auth";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-start-auth-modal',
@@ -18,7 +20,8 @@ export class StartAuthModalComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.f = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -32,10 +35,13 @@ export class StartAuthModalComponent {
       name: this.f.controls['name'].value,
       passCode: this.f.controls['passCode'].value
     }
-    this.auth.registerUser(data).subscribe((user: User[]) => {
-      if (!user.length) return this.showErrorMessage()
-      this.auth.setUser(user[0])
-      this.activeModal.close();
+    this.auth.checkIsUserExist(data.passCode).subscribe((user: User[]) => {
+      if (user.length) return this.showErrorMessage()
+      this.auth.registerUser(data).subscribe((user: User[]) => {
+        this.auth.setUser(user[0])
+        this.activeModal.close();
+        this.router.navigate(['courses'])
+      })
     })
   }
 

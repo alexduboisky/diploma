@@ -1,0 +1,5 @@
+<div class="container">
+  <div *ngFor="let question of tests">
+    <app-test-item [testItem]="question" (setAnswer)="getAnswer($event)"></app-test-item>
+  </div>
+</div>

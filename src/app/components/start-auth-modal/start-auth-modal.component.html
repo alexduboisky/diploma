@@ -24,7 +24,9 @@
         </div>
       </div>
     </form>
-
+    <div class="text-danger" *ngIf="isErrorMessageShowing">
+      Придумайте другое кодовое слово
+    </div>
   </div>
   <div class="modal-footer d-flex align-items-center justify-content-end">
     <button (click)="submitData()"  [disabled]="f.invalid" class="btn btn-success mr-3">Войти</button>

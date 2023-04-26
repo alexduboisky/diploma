@@ -2,7 +2,7 @@ export interface User {
   id: string,
   name: string,
   passCode: string,
-  coursesState: UserCourseState[]
+  coursesState?: UserCourseState[]
 }
 
 export interface UserCourseState {

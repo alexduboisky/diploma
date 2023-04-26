@@ -1,0 +1,19 @@
+<div class="mt-3">
+  <div class="h5 mb-3">{{testItem.question}}</div>
+  <form [formGroup]="form" (change)="onAnswerChange()">
+    <div *ngFor="let answer of testItem.answers; index as i" class="form-group">
+      <input class="form-check-input mx-2" type="radio" [id]="answer.text" [value]="answer" formControlName="answer">
+      <label
+        class="form-check-label"
+        [ngClass]="{
+        'text-danger': form.controls['answer'].value === answer && !form.controls['answer'].value.isCorrect,
+        'text-success': form.controls['answer'].value === answer && form.controls['answer'].value.isCorrect
+        }"
+        [for]="answer.text"
+      >
+        {{answer.text}}
+      </label>
+    </div>
+  </form>
+</div>
+<hr>

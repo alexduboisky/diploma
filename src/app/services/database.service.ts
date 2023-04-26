@@ -37,7 +37,7 @@ export class DatabaseService {
       })
   }
 
-  updateCourseToUser(userId: string, courseId: string, activeStep: string, status: string) {
+  updateCourseToUser(userId: string, courseId: string, activeStep: string, status: string = CourseState.IN_PROGRES) {
     const data: UserCourseState = {
       id: courseId,
       status,
@@ -62,6 +62,10 @@ export class DatabaseService {
     this.updateCourseToUser(userId, courseId, null, CourseState.DONE)
   }
 
+  checkIsUserExist(passCode: string) {
+    const newUserRef = this.db.list('users', ref => ref.orderByChild('passCode').equalTo(passCode))
+    return newUserRef.valueChanges()
+  }
   registerUser(data: User) {
     this.db.database.ref('users').push(data)
     const newUserRef = this.db.list('users', ref => ref.orderByChild('passCode').equalTo(data.passCode))

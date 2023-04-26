@@ -3,6 +3,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {AuthService} from "../../services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {User} from "../../models/users";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-continue-auth-modal',
@@ -16,7 +17,8 @@ export class ContinueAuthModalComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.f = new FormGroup({
       passCode: new FormControl('', Validators.required)
@@ -28,6 +30,7 @@ export class ContinueAuthModalComponent {
       if (!user.length) return this.showErrorMessage()
       this.auth.setUser(user[0])
       this.activeModal.close();
+      this.router.navigate(['courses'])
     })
   }
 

@@ -19,6 +19,21 @@ import { AboutUsComponent } from './modules/core/pages/about-us/about-us.compone
 import { ContactsComponent } from './modules/core/pages/contacts/contacts.component';
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
+import { LessonComponent } from './modules/courses/components/lesson/lesson.component';
+import { TestComponent } from './modules/courses/components/test/test.component';
+import { PracticeComponent } from './modules/courses/components/practice/practice.component';
+import { SkypeL1Component } from './modules/courses/pages/skype/skype-l1/skype-l1.component';
+import { SafePipe } from './pipes/safe.pipe';
+import { DomSanitizer } from "@angular/platform-browser";
+import { ViberL1Component } from './modules/courses/pages/viber/viber-l1/viber-l1.component';
+import { WindowsL1Component } from './modules/courses/pages/windows/windows-l1/windows-l1.component';
+import { WindowsL2Component } from './modules/courses/pages/windows/windows-l2/windows-l2.component';
+import { WindowsT1Component } from './modules/courses/pages/windows/windows-t1/windows-t1.component';
+import { TestItemComponent } from './modules/courses/components/test-item/test-item.component';
+import { WordL1Component } from './modules/courses/pages/word/word-l1/word-l1.component';
+import { WordP1Component } from './modules/courses/pages/word/word-p1/word-p1.component';
+import { WordT1Component } from './modules/courses/pages/word/word-t1/word-t1.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +47,20 @@ import {AuthGuard} from "./guards/auth.guard";
     MainCoreComponent,
     CourseComponent,
     AboutUsComponent,
-    ContactsComponent
+    ContactsComponent,
+    LessonComponent,
+    TestComponent,
+    PracticeComponent,
+    SkypeL1Component,
+    SafePipe,
+    ViberL1Component,
+    WindowsL1Component,
+    WindowsL2Component,
+    WindowsT1Component,
+    TestItemComponent,
+    WordL1Component,
+    WordP1Component,
+    WordT1Component
   ],
   imports: [
     BrowserModule,

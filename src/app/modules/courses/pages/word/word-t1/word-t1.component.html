@@ -1,0 +1,6 @@
+<app-test (isTestPassed)="getIsTestPassed($event)"></app-test>
+
+<div class="course-buttons">
+  <button class="btn btn-outline-success mx-2" (click)="prevLesson()">Предыдущий урок</button>
+  <button class="btn btn-outline-primary" [ngClass]="{ 'disabled': !isTestPassed }" [disabled]="!isTestPassed" (click)="finishCourse()">Завершить курс</button>
+</div>

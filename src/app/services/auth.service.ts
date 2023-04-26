@@ -51,7 +51,11 @@ export class AuthService {
     }
   }
 
-  registerUser(data): Observable<any> {
+  checkIsUserExist(passCode: string): Observable<any> {
+    return this.db.checkIsUserExist(passCode)
+  }
+
+  registerUser(data: User): Observable<any> {
     return this.db.registerUser(data)
   }
 
