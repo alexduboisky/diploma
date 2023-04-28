@@ -12,13 +12,13 @@ export class WordP1Component {
 
   constructor(private router: Router, private db: DatabaseService, private auth: AuthService) {
   }
-  prevLesson() {
-    this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 'l1')
+  async prevLesson() {
+    await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 'l1')
     this.router.navigate(['courses/c4/l1'])
   }
 
-  openTest() {
-    this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 't1')
+  async openTest() {
+    await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 't1')
     this.router.navigate(['courses/c4/t1'])
   }
 }

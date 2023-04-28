@@ -33,6 +33,7 @@ import { TestItemComponent } from './modules/courses/components/test-item/test-i
 import { WordL1Component } from './modules/courses/pages/word/word-l1/word-l1.component';
 import { WordP1Component } from './modules/courses/pages/word/word-p1/word-p1.component';
 import { WordT1Component } from './modules/courses/pages/word/word-t1/word-t1.component';
+import {DatabaseService} from "./services/database.service";
 
 
 @NgModule({

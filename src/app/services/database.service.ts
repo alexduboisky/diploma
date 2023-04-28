@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {AngularFireDatabase} from "@angular/fire/compat/database";
 import {Observable} from "rxjs";
 import {equalTo, update} from "@angular/fire/database";
 import {User, UserCourseState} from "../models/users";
 import {CourseState} from "./course.service";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,49 +23,81 @@ export class DatabaseService {
     return ref.valueChanges()
   }
 
-  addCourseToUser(userId: string, courseId: string, activeStep: string) {
-    const data: UserCourseState = {
-      id: courseId,
-      status: CourseState.IN_PROGRES,
-      activeStep
-    }
-    const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
-    ref.once('value')
-      .then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-          childSnapshot.child('coursesState').ref.push(data)
+  subs
+
+  restartCourseForUser(userId: string, courseId: string): any {
+    return new Promise<void>(resolve => {
+      const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
+      ref.once('value')
+        .then(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            const corseRef = childSnapshot.ref.child('coursesState').ref.orderByChild('id').equalTo(courseId)
+            corseRef.once("value")
+              .then(snap => {
+                snap.forEach(childSnap => {
+                  childSnap.ref.remove()
+                  resolve()
+                })
+              })
+          })
         })
-      })
+    })
+  }
+
+  addCourseToUser(userId: string, courseId: string) {
+    return new Promise<void>(resolve => {
+      const data: UserCourseState = {
+        id: courseId,
+        status: CourseState.IN_PROGRES,
+        activeStep: 'l1'
+      }
+      const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
+      ref.once('value')
+        .then(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            childSnapshot.child('coursesState').ref.push(data)
+            resolve()
+          })
+        })
+    })
   }
 
   updateCourseToUser(userId: string, courseId: string, activeStep: string, status: string = CourseState.IN_PROGRES) {
-    const data: UserCourseState = {
-      id: courseId,
-      status,
-      activeStep
-    }
-    const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
-    ref.once('value')
-      .then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-          const corseRef = childSnapshot.ref.child('coursesState').ref.orderByChild('id').equalTo(courseId)
-          corseRef.once("value")
-            .then(snap => {
-              snap.forEach(childSnap => {
-                childSnap.ref.update(data)
+    return new Promise<void>(resolve => {
+      const data: UserCourseState = {
+        id: courseId,
+        status,
+        activeStep
+      }
+      const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
+      ref.once('value')
+        .then(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            const corseRef = childSnapshot.ref.child('coursesState').ref.orderByChild('id').equalTo(courseId)
+            corseRef.once("value")
+              .then(snap => {
+                snap.forEach(childSnap => {
+                  childSnap.ref.update(data)
+                  resolve()
+                })
               })
-            })
+          })
         })
-      })
+    })
   }
 
   finishCourseToUser(userId: string, courseId: string) {
-    this.updateCourseToUser(userId, courseId, null, CourseState.DONE)
+    return this.updateCourseToUser(userId, courseId, null, CourseState.DONE)
   }
 
   checkIsUserExist(passCode: string) {
     const newUserRef = this.db.list('users', ref => ref.orderByChild('passCode').equalTo(passCode))
     return newUserRef.valueChanges()
+  }
+
+  updateUserData(passCode: string) {
+    const userRef = this.db.list('users', ref => ref.orderByChild('passCode').equalTo(passCode))
+    return userRef.valueChanges()
   }
   registerUser(data: User) {
     this.db.database.ref('users').push(data)

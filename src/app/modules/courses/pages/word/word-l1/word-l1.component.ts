@@ -11,8 +11,8 @@ import {AuthService} from "../../../../../services/auth.service";
 export class WordL1Component {
   constructor(private router: Router, private db: DatabaseService, private auth: AuthService) {
   }
-  nextLesson() {
-    this.db.updateCourseToUser(this.auth.User.getValue().id, 'c4', 'p1')
+  async nextLesson() {
+    await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c4', 'p1')
     this.router.navigate(['courses/c4/p1'])
   }
 }

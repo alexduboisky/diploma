@@ -1,7 +1,21 @@
 <div class="h-100 background-image">
-  <div class="d-flex flex-column container py-3">
+  <div class="d-flex flex-column container py-3" *ngIf="!auth.logged">
     <div class="course" *ngFor="let course of courses">
       <app-course [course]="course"></app-course>
+    </div>
+  </div>
+  <div class="d-flex flex-column container py-3" *ngIf="auth.logged">
+    <p *ngIf="startedCourses.length" class="h4">Начатые курсы ({{startedCourses.length}})</p>
+    <div  class="course" *ngFor="let course of startedCourses">
+      <app-course [course]="course" [activeStep]="course.activeStep" [status]="courseState.IN_PROGRES"></app-course>
+    </div>
+    <p *ngIf="newCourses.length" class="h4">Доступные курсы ({{newCourses.length}})</p>
+    <div class="course" *ngFor="let course of newCourses">
+      <app-course [course]="course" [status]="courseState.NEW"></app-course>
+    </div>
+    <p *ngIf="finishiedCourses.length" class="h4">Завершенные курсы ({{finishiedCourses.length}})</p>
+    <div class="course" *ngFor="let course of finishiedCourses">
+      <app-course [course]="course" [status]="courseState.DONE"></app-course>
     </div>
   </div>
 </div>

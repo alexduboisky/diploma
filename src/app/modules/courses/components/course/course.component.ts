@@ -22,13 +22,30 @@ export class CourseComponent {
     tests: []
   }
 
+  @Input() activeStep: string = ''
+  @Input() status: string = ''
+
+  courseStates = CourseState
+
   constructor(private db: DatabaseService, public authService: AuthService, private router: Router) {}
 
   startCourse(id: string) {
-    this.db.getCourse(id).subscribe((course: Course[]) => {
-      this.db.addCourseToUser(this.authService.User.getValue().id, id, 'l1')
+    this.db.getCourse(id).subscribe(async (course: Course[]) => {
+      await this.db.addCourseToUser(this.authService.User.getValue().id, id)
       const courseEl = course[0]
       this.router.navigate([`courses/${courseEl.id}/l1`])
     })
+  }
+
+  continueCourse(id: string) {
+    this.db.getCourse(id).subscribe((course: Course[]) => {
+      const courseEl = course[0]
+      this.router.navigate([`courses/${courseEl.id}/${this.activeStep}`])
+    })
+  }
+
+  async restartCourse(id: string) {
+    await this.db.restartCourseForUser(this.authService.User.getValue().id, id)
+    this.startCourse(id)
   }
 }

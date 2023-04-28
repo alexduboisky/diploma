@@ -8,7 +8,7 @@ import {Admin, User} from "../models/users";
 })
 export class AuthService {
 
-  User = new BehaviorSubject<User>(null);
+  public User = new BehaviorSubject<User>(null);
   Admin = new BehaviorSubject<Admin>(null);
 
   logged: boolean = false;
@@ -17,6 +17,10 @@ export class AuthService {
   constructor(private db: DatabaseService) {
     this.setUserFromLocalStorage()
     this.setAdminFromLocalStorage()
+
+    this.db.updateUserData(this.User.getValue().passCode).subscribe((user: User[]) => {
+      this.User.next(user[0])
+    })
 
     this.User.subscribe((user: User) => {
       if (user) {

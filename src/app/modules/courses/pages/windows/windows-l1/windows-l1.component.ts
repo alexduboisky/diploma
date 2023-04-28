@@ -12,8 +12,8 @@ export class WindowsL1Component {
 
   constructor(private router: Router, private db: DatabaseService, private auth: AuthService) {
   }
-  nextLesson() {
-    this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 'l2')
+  async nextLesson() {
+    await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 'l2')
     this.router.navigate(['courses/c3/l2'])
   }
 }

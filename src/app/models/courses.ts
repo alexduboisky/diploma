@@ -1,4 +1,5 @@
 export interface Course {
+  activeStep?: string;
   id: string,
   title: string,
   description: string,
