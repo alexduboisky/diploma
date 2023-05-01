@@ -1,0 +1,19 @@
+.content {
+  &-admin {
+    background: #cbc2c2;
+    border: 1px solid #cbc2c2;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  &-user {
+    background: #eaeaea;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding: 5px;
+  }
+}
+
+.date {
+  font-size: 0.8em;
+}

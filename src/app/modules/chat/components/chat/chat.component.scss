@@ -1,0 +1,24 @@
+.chat-window {
+  width: 35%;
+}
+
+.title {
+  font-size: 0.8em;
+  cursor: default !important;
+}
+
+.header {
+  height: 5%;
+}
+
+.footer {
+  height: 10%;
+}
+
+.content {
+  height: 85%;
+}
+
+textarea {
+  resize: none;
+}

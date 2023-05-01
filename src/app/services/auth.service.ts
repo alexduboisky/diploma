@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {DatabaseService} from "./database.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Admin, User} from "../models/users";
+import {ChatService} from "./chat.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +15,17 @@ export class AuthService {
   logged: boolean = false;
   adminLogged: boolean = false;
 
-  constructor(private db: DatabaseService) {
+  constructor(private db: DatabaseService, private chat: ChatService) {
     this.setUserFromLocalStorage()
     this.setAdminFromLocalStorage()
 
-    this.db.updateUserData(this.User.getValue().passCode).subscribe((user: User[]) => {
+    this.db.updateUserData(this.User.getValue()?.passCode).subscribe((user: User[]) => {
       this.User.next(user[0])
     })
 
     this.User.subscribe((user: User) => {
       if (user) {
+        this.chat.subscribeToChat(user.id)
         localStorage.setItem('user', JSON.stringify(user))
       } else {
         localStorage.removeItem('user')

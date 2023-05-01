@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {StartAuthModalComponent} from "../start-auth-modal/start-auth-modal.component";
 import {ContinueAuthModalComponent} from "../continue-auth-modal/continue-auth-modal.component";
@@ -14,6 +14,8 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent {
 
+  @Output() openChatEvent = new EventEmitter<void>()
+
   constructor(public modalService: NgbModal, public auth: AuthService, private router: Router) {}
 
   startStudy() {
@@ -27,5 +29,9 @@ export class HeaderComponent {
   logout() {
     this.auth.logout()
     this.router.navigate([''])
+  }
+
+  openChat() {
+    this.openChatEvent.emit()
   }
 }

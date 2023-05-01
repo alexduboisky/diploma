@@ -95,7 +95,7 @@ export class DatabaseService {
     return newUserRef.valueChanges()
   }
 
-  updateUserData(passCode: string) {
+  updateUserData(passCode:string = '') {
     const userRef = this.db.list('users', ref => ref.orderByChild('passCode').equalTo(passCode))
     return userRef.valueChanges()
   }
@@ -113,5 +113,34 @@ export class DatabaseService {
   loginAdmin(login: string) {
     const ref = this.db.list('admins', ref => ref.orderByChild('login').equalTo(login))
     return ref.valueChanges()
+  }
+
+  getUserChat(userId: string): Observable<any> {
+    const ref = this.db.list('threads', ref => ref.orderByChild('userId').equalTo(userId))
+    return ref.valueChanges()
+  }
+
+  createChat(data) {
+    return new Promise<void>((resolve) => {
+      this.db.database.ref('threads').push(data).then(() => resolve())
+    })
+  }
+
+  sendMessageFromUser(text: string, userId: string) {
+    return this.sendMessage(userId, { text, isAdmin: true })
+  }
+
+  sendMessage(userId: string, data) {
+    return new Promise<void>((resolve) => {
+      const ref = this.db.database.ref('threads').orderByChild('userId').equalTo(userId)
+      ref.once('value')
+        .then(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            const date = new Date()
+            childSnapshot.child('messages').ref.push({ ...data, timestamp: date.getTime()})
+            resolve()
+          })
+        })
+    })
   }
 }

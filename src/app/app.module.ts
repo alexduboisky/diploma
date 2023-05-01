@@ -34,6 +34,8 @@ import { WordL1Component } from './modules/courses/pages/word/word-l1/word-l1.co
 import { WordP1Component } from './modules/courses/pages/word/word-p1/word-p1.component';
 import { WordT1Component } from './modules/courses/pages/word/word-t1/word-t1.component';
 import {DatabaseService} from "./services/database.service";
+import { ChatComponent } from './modules/chat/components/chat/chat.component';
+import { MessageComponent } from './modules/chat/components/message/message.component';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import {DatabaseService} from "./services/database.service";
     TestItemComponent,
     WordL1Component,
     WordP1Component,
-    WordT1Component
+    WordT1Component,
+    ChatComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

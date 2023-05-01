@@ -1,0 +1,25 @@
+<div class="chat-window d-flex flex-column justify-content-between bg-light h-100 p-2">
+  <div class="header d-flex justify-content-between w-100 h2 fw-bold">
+    <div class="title">Чат с учителем</div>
+    <div role="button" (click)="closeChat()">&#9587;</div>
+  </div>
+  <div class="content d-flex flex-column justify-content-between">
+    <div class="messages form-control h-100 p-2 overflow-auto">
+      <div *ngIf="isNewChat" class="h-100 w-100 d-flex justify-content-center align-items-center">Тут пока ничего нет...</div>
+      <div *ngIf="!isNewChat" class="d-flex flex-column-reverse overflow-auto h-100">
+        <app-message *ngFor="let message of messages" [message]="message"></app-message>
+      </div>
+    </div>
+    <div class="user-message">
+      <div class="form-group mb-2">
+        <label for="userMessage">Ваше сообщение</label>
+        <textarea [(ngModel)]="userMessage" class="form-control" id="userMessage" rows="5"></textarea>
+      </div>
+      <button class="btn w-100 btn-outline-success" (click)="sendMessage()">Отправить сообщение</button>
+    </div>
+  </div>
+  <div class="footer">
+    <hr>
+    <button class="btn w-100 btn-outline-danger" (click)="closeChat()">Закрыть чат</button>
+  </div>
+</div>
