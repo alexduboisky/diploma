@@ -5,5 +5,5 @@
   </div>
   <app-footer></app-footer>
 
-  <app-chat class="chat-overlay" (closeChatEvent)="isChatOpened = false" *ngIf="isChatOpened"></app-chat>
+  <app-chat class="chat-overlay" (closeChatEvent)="isChatOpened = false" *ngIf="isChatOpened && auth.logged"></app-chat>
 </div>

@@ -14,11 +14,13 @@ export class WindowsL2Component {
   }
   async prevLesson() {
     await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 'l1')
+    await this.auth.updateUserData()
     this.router.navigate(['courses/c3/l1'])
   }
 
   async openTest() {
     await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 't1')
+    await this.auth.updateUserData()
     this.router.navigate(['courses/c3/t1'])
   }
 }

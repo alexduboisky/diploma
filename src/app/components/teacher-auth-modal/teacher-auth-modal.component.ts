@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {Admin} from "../../models/users";
 import md5 from 'md5'
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-teacher-auth-modal',
@@ -17,7 +18,8 @@ export class TeacherAuthModalComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.f = new FormGroup({
       login: new FormControl('', Validators.required),
@@ -31,6 +33,7 @@ export class TeacherAuthModalComponent {
       if (!admin.length || admin[0].passwordHash !== hashedPassword) return this.showErrorMessage()
       this.auth.setAdmin(admin[0])
       this.activeModal.close();
+      this.router.navigate(['admin-panel'])
     })
   }
 

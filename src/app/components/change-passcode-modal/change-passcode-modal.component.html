@@ -1,0 +1,23 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Смена пароля</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="f">
+      <div class="mb-3">
+        <label for="password">Новое кодовое слово</label>
+        <div class="input-group">
+          <input id="password" class="form-control w-100" formControlName="passCode" type="password">
+        </div>
+        <div class="text-danger" *ngIf="!f.controls['passCode'].value && f.controls['passCode'].touched">
+          Поле не может быть пустым
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer d-flex align-items-center justify-content-end">
+    <button  (click)="submitData()" [disabled]="f.invalid" class="btn btn-success mr-3">Сохранить</button>
+    <button (click)="cancel()" class="btn btn-danger">Отменить</button>
+  </div>
+</div>

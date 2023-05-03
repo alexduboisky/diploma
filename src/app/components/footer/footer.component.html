@@ -9,6 +9,9 @@
     <div class="mx-2" routerLinkActive="active-route">
       <a class="nav-link text-decoration-underline" routerLink="/contacts">Контакты</a>
     </div>
+    <div *ngIf="auth.adminLogged" class="mx-2" routerLinkActive="active-route">
+      <a class="nav-link text-decoration-underline" routerLink="/admin-panel">Панель администратора</a>
+    </div>
   </div>
   <div *ngIf="!auth.logged && !auth.adminLogged" class="buttons mx-3 teacher-button">
     <div class="btn btn-sm btn-outline-secondary" (click)="openAuthModal()">Вход для учителей</div>

@@ -36,6 +36,12 @@ import { WordT1Component } from './modules/courses/pages/word/word-t1/word-t1.co
 import {DatabaseService} from "./services/database.service";
 import { ChatComponent } from './modules/chat/components/chat/chat.component';
 import { MessageComponent } from './modules/chat/components/message/message.component';
+import { AdminPanelComponent } from './modules/admin/pages/admin-panel/admin-panel.component';
+import { UserListComponent } from './modules/admin/components/user-list/user-list.component';
+import { UserChatComponent } from './modules/admin/components/user-chat/user-chat.component';
+import { UserCoursesInfoComponent } from './modules/admin/components/user-courses-info/user-courses-info.component';
+import { ChangePasscodeModalComponent } from './components/change-passcode-modal/change-passcode-modal.component';
+import { FeedbackComponent } from './modules/admin/components/feedback/feedback.component';
 
 
 @NgModule({
@@ -65,7 +71,13 @@ import { MessageComponent } from './modules/chat/components/message/message.comp
     WordP1Component,
     WordT1Component,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    AdminPanelComponent,
+    UserListComponent,
+    UserChatComponent,
+    UserCoursesInfoComponent,
+    ChangePasscodeModalComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

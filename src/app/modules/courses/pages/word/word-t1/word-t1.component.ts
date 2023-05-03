@@ -16,11 +16,13 @@ export class WordT1Component {
   async finishCourse() {
     const courseId = this.router.url.split('/').reverse()[1]
     await this.db.finishCourseToUser(this.auth.User.getValue().id, courseId)
+    await this.auth.updateUserData()
     this.router.navigate(['courses'])
   }
 
   async prevLesson() {
     await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c4', 'p1')
+    await this.auth.updateUserData()
     this.router.navigate(['courses/c4/p1'])
   }
 

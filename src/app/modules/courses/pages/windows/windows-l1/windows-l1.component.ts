@@ -14,6 +14,7 @@ export class WindowsL1Component {
   }
   async nextLesson() {
     await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c3', 'l2')
+    await this.auth.updateUserData()
     this.router.navigate(['courses/c3/l2'])
   }
 }

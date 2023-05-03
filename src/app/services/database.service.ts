@@ -23,7 +23,10 @@ export class DatabaseService {
     return ref.valueChanges()
   }
 
-  subs
+  getUsers(): Observable<any> {
+    const ref = this.db.list('users')
+    return ref.valueChanges()
+  }
 
   restartCourseForUser(userId: string, courseId: string): any {
     return new Promise<void>(resolve => {
@@ -57,6 +60,18 @@ export class DatabaseService {
           snapshot.forEach(childSnapshot => {
             childSnapshot.child('coursesState').ref.push(data)
             resolve()
+          })
+        })
+    })
+  }
+
+  updateUserInfo(data) {
+    return new Promise<void>( resolve => {
+      const ref = this.db.database.ref('users').orderByChild('id').equalTo(data.id)
+      ref.once('value').then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+            childSnapshot.ref.update(data)
+              .then(() => resolve())
           })
         })
     })
@@ -110,6 +125,24 @@ export class DatabaseService {
     return ref.valueChanges()
   }
 
+  deleteUser(userId: string) {
+    return new Promise<void>(resolve => {
+      const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
+      ref.once('value')
+        .then(snapshot => {
+          snapshot.forEach(childSnapshot => {
+            childSnapshot.ref.once("value")
+              .then(snap => {
+                snap.forEach(childSnap => {
+                  childSnap.ref.remove()
+                  resolve()
+                })
+              })
+          })
+        })
+    })
+  }
+
   loginAdmin(login: string) {
     const ref = this.db.list('admins', ref => ref.orderByChild('login').equalTo(login))
     return ref.valueChanges()
@@ -141,6 +174,23 @@ export class DatabaseService {
             resolve()
           })
         })
+    })
+  }
+
+  getFeedbacks() {
+    const ref = this.db.list('feedbacks')
+    return ref.valueChanges()
+  }
+
+  sendFeedBack(data) {
+    return new Promise<void>(resolve => {
+      this.db.database.ref('users').push(data).then(() => resolve())
+    })
+  }
+
+  updateFeedback() {
+    return new Promise<void>(resolve => {
+
     })
   }
 }

@@ -1,0 +1,15 @@
+<div class="mb-3">
+  <label for="search" class="form-label">Поиск ученика</label>
+  <input type="email" class="form-control" id="search" placeholder="Поиск" [(ngModel)]="searchInput" (keyup)="searchUser()">
+</div>
+<ngb-accordion *ngIf="processedUserList.length" #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel *ngFor="let user of processedUserList" [title]="user.name">
+    <ng-template ngbPanelContent>
+      <app-user-courses-info *ngIf="isCoursesLoaded" [user]="user" [courses]="courses" (deleteUserEvent)="getUsers()"></app-user-courses-info>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+<div *ngIf="!processedUserList.length" class="w-100 h-100 d-flex justify-content-center align-items-center">
+  Ученики не найдены
+</div>

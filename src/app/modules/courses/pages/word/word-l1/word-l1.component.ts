@@ -13,6 +13,7 @@ export class WordL1Component {
   }
   async nextLesson() {
     await this.db.updateCourseToUser(this.auth.User.getValue().id, 'c4', 'p1')
+    await this.auth.updateUserData()
     this.router.navigate(['courses/c4/p1'])
   }
 }

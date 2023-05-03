@@ -33,6 +33,7 @@ export class CourseComponent {
     this.db.getCourse(id).subscribe(async (course: Course[]) => {
       await this.db.addCourseToUser(this.authService.User.getValue().id, id)
       const courseEl = course[0]
+      await this.authService.updateUserData()
       this.router.navigate([`courses/${courseEl.id}/l1`])
     })
   }

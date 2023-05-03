@@ -13,6 +13,8 @@ import {WordL1Component} from "./modules/courses/pages/word/word-l1/word-l1.comp
 import {WordT1Component} from "./modules/courses/pages/word/word-t1/word-t1.component";
 import {WordP1Component} from "./modules/courses/pages/word/word-p1/word-p1.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {AdminPanelComponent} from "./modules/admin/pages/admin-panel/admin-panel.component";
+import {AdminGuard} from "./guards/admin.guard";
 
 const routes: Routes = [
   {
@@ -73,6 +75,11 @@ const routes: Routes = [
         path: 'courses/c4/p1',
         component: WordP1Component,
         canActivate: [AuthGuard],
+      },
+      {
+        path: 'admin-panel',
+        component: AdminPanelComponent,
+        canActivate: [AdminGuard],
       }
     ]
   }
