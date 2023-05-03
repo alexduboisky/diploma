@@ -184,13 +184,19 @@ export class DatabaseService {
 
   sendFeedBack(data) {
     return new Promise<void>(resolve => {
-      this.db.database.ref('users').push(data).then(() => resolve())
+      this.db.database.ref('feedbacks').push({ ...data, isAnswered: false }).then(() => resolve())
     })
   }
 
-  updateFeedback() {
-    return new Promise<void>(resolve => {
-
+  updateFeedback(data) {
+    return new Promise<void>( resolve => {
+      const ref = this.db.database.ref('feedbacks').orderByChild('id').equalTo(data.id)
+      ref.once('value').then(snapshot => {
+        snapshot.forEach(childSnapshot => {
+          childSnapshot.ref.update({ ...data, isAnswered: true })
+            .then(() => resolve())
+        })
+      })
     })
   }
 }
