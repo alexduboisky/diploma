@@ -21,7 +21,9 @@ export class ChatComponent {
       if (!chat) return
 
       this.isNewChat = false
-      this.messages = Object.values(chat.messages).reverse()
+      if (chat.messages) {
+        this.messages = Object.values(chat.messages).reverse()
+      }
     })
   }
   closeChat() {

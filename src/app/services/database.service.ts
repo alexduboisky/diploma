@@ -160,7 +160,7 @@ export class DatabaseService {
   }
 
   sendMessageFromUser(text: string, userId: string) {
-    return this.sendMessage(userId, { text, isAdmin: true })
+    return this.sendMessage(userId, { text, isAdmin: false })
   }
 
   sendMessage(userId: string, data) {

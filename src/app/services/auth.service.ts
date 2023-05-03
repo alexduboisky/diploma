@@ -23,7 +23,6 @@ export class AuthService {
     this.User.subscribe((user: User) => {
       if (this.adminLogged) return
       if (user) {
-        this.chat.subscribeToChat(user.id)
         localStorage.setItem('user', JSON.stringify(user))
       } else {
         this.router.navigate([''])
@@ -34,7 +33,6 @@ export class AuthService {
 
     this.Admin.subscribe((admin: Admin) => {
       if (this.logged)
-        debugger
       if (admin) {
         localStorage.setItem('admin', JSON.stringify(admin))
       } else {
@@ -48,7 +46,9 @@ export class AuthService {
   setUserFromLocalStorage(): void {
     const user = localStorage.getItem('user')
     if (user) {
-      this.User.next(JSON.parse(user))
+      const userObj = JSON.parse(user)
+      this.chat.subscribeToChat(userObj.id)
+      this.User.next(userObj)
     }
   }
 
@@ -89,6 +89,7 @@ export class AuthService {
   }
 
   setUser(userData: User): void {
+    this.chat.subscribeToChat(userData.id)
     this.User.next(userData)
   }
 
