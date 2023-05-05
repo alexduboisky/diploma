@@ -5,13 +5,24 @@ import {equalTo, update} from "@angular/fire/database";
 import {User, UserCourseState} from "../models/users";
 import {CourseState} from "./course.service";
 import {AuthService} from "./auth.service";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {}
+
+  uploadFile(file) {
+    return new Promise<string>(resolve => {
+      const uploadFile = this.storage.ref(`practices/${file.name}`).put(file)
+      uploadFile.task.on('state_changed', () => {}, () => {},
+        () =>  {
+        uploadFile.task.snapshot.ref.getDownloadURL().then(downloadURL => resolve(downloadURL))
+        })
+    })
+  }
 
   getCourses(): Observable<any[]> {
     const ref = this.db.list('courses')
@@ -77,12 +88,13 @@ export class DatabaseService {
     })
   }
 
-  updateCourseToUser(userId: string, courseId: string, activeStep: string, status: string = CourseState.IN_PROGRES) {
+  updateCourseToUser(userId: string, courseId: string, activeStep: string, status: string = CourseState.IN_PROGRES, additionalData = {}) {
     return new Promise<void>(resolve => {
       const data: UserCourseState = {
         id: courseId,
         status,
-        activeStep
+        activeStep,
+        ...additionalData
       }
       const ref = this.db.database.ref('users').orderByChild('id').equalTo(userId)
       ref.once('value')

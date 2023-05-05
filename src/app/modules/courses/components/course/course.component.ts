@@ -25,6 +25,9 @@ export class CourseComponent {
   @Input() activeStep: string = ''
   @Input() status: string = ''
 
+  @Input() practiceUrl: string = ''
+  @Input() isPracticeChecked: boolean = false
+
   courseStates = CourseState
 
   constructor(private db: DatabaseService, public authService: AuthService, private router: Router) {}
@@ -49,4 +52,6 @@ export class CourseComponent {
     await this.db.restartCourseForUser(this.authService.User.getValue().id, id)
     this.startCourse(id)
   }
+
+  protected readonly console = console;
 }

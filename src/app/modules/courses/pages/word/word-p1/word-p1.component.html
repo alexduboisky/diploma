@@ -4,7 +4,12 @@
     <ul>
       <li>Выполнить набор текста</li>
       <li>Отредактировать по образцу</li>
+      <li>Отправить файл для проверки в поле ниже</li>
     </ul>
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Файл для проверки</label>
+      <input class="form-control" type="file" id="formFile" (change)="handleFileInput($event.target.files)" accept=".doc, .docx">
+    </div>
   </div>
   <div class="mt-4">
     <p style='margin-right:0cm;margin-left:0cm;font-size:1.1em;font-family:"Times New Roman",serif;margin:0cm;margin-bottom:.0001pt;text-align:center;background:white;'><strong><span style='font-size:1.1em;font-family:"Calibri",sans-serif;color:#333333;'>О&nbsp;</span></strong><strong><em><u><span style='font-size:1.1em;font-family:"Calibri",sans-serif;color:red;'>винегрет</span></u></em></strong><strong><span style='font-size:1.1em;font-family:"Calibri",sans-serif;color:#333333;'>е</span></strong></p>
@@ -15,6 +20,6 @@
 
   <div class="course-buttons">
     <button class="btn btn-outline-success mx-2" (click)="prevLesson()">Предыдущий урок</button>
-    <button class="btn btn-outline-primary" (click)="openTest()">Перейти к тесту</button>
+    <button class="btn btn-outline-primary" [disabled]="!isFileUploaded" (click)="openTest()">Перейти к тесту</button>
   </div>
 </div>

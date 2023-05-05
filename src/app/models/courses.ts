@@ -1,5 +1,7 @@
 export interface Course {
   activeStep?: string;
+  practiceUrl?: string;
+  isPracticeChecked?: boolean;
   id: string,
   title: string,
   description: string,

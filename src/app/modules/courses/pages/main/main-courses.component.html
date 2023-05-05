@@ -7,7 +7,7 @@
   <div class="d-flex flex-column container py-3" *ngIf="auth.logged">
     <p *ngIf="startedCourses.length" class="h4">Начатые курсы ({{startedCourses.length}})</p>
     <div  class="course" *ngFor="let course of startedCourses">
-      <app-course [course]="course" [activeStep]="course.activeStep" [status]="courseState.IN_PROGRES"></app-course>
+      <app-course [course]="course" [activeStep]="course.activeStep" [status]="courseState.IN_PROGRES" [practiceUrl]="course.practiceUrl" [isPracticeChecked]="course.isPracticeChecked"></app-course>
     </div>
     <p *ngIf="newCourses.length" class="h4">Доступные курсы ({{newCourses.length}})</p>
     <div class="course" *ngFor="let course of newCourses">

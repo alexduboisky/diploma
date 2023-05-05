@@ -9,7 +9,9 @@
         <p class="card-text">{{course.description}}</p>
       </div>
       <div *ngIf="authService.logged && status == courseStates.NEW" class="btn btn-outline-dark mt-2 col-md-4" (click)="startCourse(course.id)">Начать курс</div>
-      <div *ngIf="authService.logged && status == courseStates.IN_PROGRES" class="btn btn-outline-dark mt-2 col-md-4" (click)="continueCourse(course.id)">Продолжить курс</div>
+      <div *ngIf="authService.logged && status == courseStates.IN_PROGRES && !course.practiceUrl" class="btn btn-outline-dark mt-2 col-md-4" (click)="continueCourse(course.id)">Продолжить курс</div>
+      <div *ngIf="authService.logged && status == courseStates.IN_PROGRES && course.practiceUrl && !course.isPracticeChecked" class="btn disabled btn-outline-warning mt-2 col-md-4" disabled="">Задание на проверке</div>
+      <div *ngIf="authService.logged && status == courseStates.DONE && course.isPracticeChecked" class="btn disabled btn-outline-success mt-2 col-md-4" disabled="">Задание проверено</div>
       <div *ngIf="authService.logged && status === courseStates.DONE" class="btn btn-outline-dark mt-2 col-md-4" (click)="restartCourse(course.id)">Пройти еще раз</div>
     </div>
   </div>

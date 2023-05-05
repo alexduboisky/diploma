@@ -18,6 +18,12 @@
         <app-feedback></app-feedback>
       </ng-template>
     </li>
+    <li [ngbNavItem]="4">
+      <a ngbNavLink>Практические задания</a>
+      <ng-template ngbNavContent>
+        <app-practices></app-practices>
+      </ng-template>
+    </li>
   </ul>
 
   <div [ngbNavOutlet]="nav" class="mt-2"></div>

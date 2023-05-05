@@ -23,6 +23,7 @@
     "@firebase/database-types": "^0.10.4",
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "@popperjs/core": "^2.11.7",
+    "angular-uploader": "^8.25.0",
     "bootstrap": "^5.2.3",
     "firebase": "^9.18.0",
     "md5": "^2.3.0",

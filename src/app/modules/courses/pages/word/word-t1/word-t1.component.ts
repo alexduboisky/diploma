@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {DatabaseService} from "../../../../../services/database.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../../../services/auth.service";
+import {CourseState} from "../../../../../services/course.service";
 
 @Component({
   selector: 'app-word-t1',
@@ -14,9 +15,6 @@ export class WordT1Component {
   }
 
   async finishCourse() {
-    const courseId = this.router.url.split('/').reverse()[1]
-    await this.db.finishCourseToUser(this.auth.User.getValue().id, courseId)
-    await this.auth.updateUserData()
     this.router.navigate(['courses'])
   }
 

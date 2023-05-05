@@ -3,6 +3,7 @@ import {DatabaseService} from "../../../../services/database.service";
 import {Course} from "../../../../models/courses";
 import {AuthService} from "../../../../services/auth.service";
 import {CourseState} from "../../../../services/course.service";
+import {User} from "../../../../models/users";
 
 @Component({
   selector: 'app-courses-main',
@@ -20,7 +21,8 @@ export class MainCoursesComponent implements OnInit{
 
   constructor(private db: DatabaseService, public auth: AuthService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.auth.updateUserData()
     this.db.getCourses().subscribe((data: Course[]) => {
       if (this.auth.logged) return this.processCourses(data)
       this.courses = data
@@ -42,7 +44,7 @@ export class MainCoursesComponent implements OnInit{
           break
         }
         case CourseState.DONE: {
-          this.finishiedCourses.push(course)
+          this.finishiedCourses.push({ ...courseFromList , ...course})
           break
         }
         case CourseState.IN_PROGRES: {

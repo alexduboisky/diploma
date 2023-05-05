@@ -8,7 +8,9 @@ export interface User {
 export interface UserCourseState {
   id: string,
   activeStep: string,
-  status: string
+  status: string,
+  practiceUrl?: string,
+  isPracticeChecked?: boolean
 }
 
 export interface Admin {

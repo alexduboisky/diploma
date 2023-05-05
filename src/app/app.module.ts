@@ -42,6 +42,7 @@ import { UserChatComponent } from './modules/admin/components/user-chat/user-cha
 import { UserCoursesInfoComponent } from './modules/admin/components/user-courses-info/user-courses-info.component';
 import { ChangePasscodeModalComponent } from './components/change-passcode-modal/change-passcode-modal.component';
 import { FeedbackComponent } from './modules/admin/components/feedback/feedback.component';
+import { PracticesComponent } from './modules/admin/components/practices/practices.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { FeedbackComponent } from './modules/admin/components/feedback/feedback.
     UserChatComponent,
     UserCoursesInfoComponent,
     ChangePasscodeModalComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    PracticesComponent
   ],
   imports: [
     BrowserModule,
