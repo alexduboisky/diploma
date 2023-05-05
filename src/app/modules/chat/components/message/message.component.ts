@@ -8,6 +8,7 @@ import {message} from "../../../../models/chat";
 })
 export class MessageComponent {
   @Input() message: message
+  @Input() isAdmin: boolean
 
   constructor() {
 

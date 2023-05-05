@@ -1,1 +1,29 @@
-<p>user-chat works!</p>
+<div class="container h-100 w-100 d-flex">
+  <div class="chat-container border-primary d-flex">
+    <div class="user-list">
+      <div class="mb-3">
+        <label for="search" class="form-label p-1">Поиск ученика</label>
+        <input type="email" class="form-control p-1" id="search" placeholder="Поиск" [(ngModel)]="searchInput" (keyup)="searchUser()">
+      </div>
+      <ul class="list-group ">
+        <li *ngFor="let user of processedUserList; let idx = index" (click)="getUserChat(user.id, idx)" class="user-list-item" [ngClass]="{ 'user-list-item-selected': idx === selectedUser}">
+          <div class="fw-bold">{{user.name}}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="user-messages p-2 overflow-auto h-100">
+      <div *ngIf="isNewChat" class="messages-list w-100 d-flex justify-content-center align-items-center">Тут пока ничего нет...</div>
+      <div *ngIf="!isNewChat" class="messages-list d-flex flex-column-reverse overflow-auto">
+        <app-message *ngFor="let message of messages" [message]="message" [isAdmin]="true"></app-message>
+      </div>
+      <hr>
+      <div class="user-message h-25">
+        <div class="form-group mb-2">
+          <label for="userMessage">Ваше сообщение</label>
+          <textarea [(ngModel)]="userMessage" class="form-control" id="userMessage" rows="3"></textarea>
+        </div>
+        <button class="btn w-100 btn-outline-success" (click)="sendMessage()">Отправить сообщение</button>
+      </div>
+    </div>
+  </div>
+</div>

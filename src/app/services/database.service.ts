@@ -153,6 +153,11 @@ export class DatabaseService {
     return ref.valueChanges()
   }
 
+  getChats(): Observable<any> {
+    const ref = this.db.list('threads')
+    return ref.valueChanges()
+  }
+
   createChat(data) {
     return new Promise<void>((resolve) => {
       this.db.database.ref('threads').push(data).then(() => resolve())
@@ -161,6 +166,10 @@ export class DatabaseService {
 
   sendMessageFromUser(text: string, userId: string) {
     return this.sendMessage(userId, { text, isAdmin: false })
+  }
+
+  sendMessageFromAdmin(text: string, userId: string) {
+    return this.sendMessage(userId, { text, isAdmin: true })
   }
 
   sendMessage(userId: string, data) {

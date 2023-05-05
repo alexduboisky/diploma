@@ -1,4 +1,4 @@
-<div class="message p-2 border-2 w-100 d-flex" [ngClass]="{ 'justify-content-end' : !message.isAdmin }">
+<div class="message p-2 border-2 w-100 d-flex" [ngClass]="{ 'justify-content-end' : !message.isAdmin, 'flex-row-reverse': isAdmin }">
   <div class="content d-flex flex-column w-75" [ngClass]="{ 'content-admin' : message.isAdmin, 'content-user' : !message.isAdmin }">
     <div class="text">{{message.text}}</div>
     <div class="date text-secondary">{{createDate(message.timestamp)}}</div>

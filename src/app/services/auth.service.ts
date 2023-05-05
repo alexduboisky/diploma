@@ -25,6 +25,7 @@ export class AuthService {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user))
       } else {
+        this.chat.userChat.next(null)
         this.router.navigate([''])
         localStorage.removeItem('user')
       }
@@ -32,7 +33,7 @@ export class AuthService {
     })
 
     this.Admin.subscribe((admin: Admin) => {
-      if (this.logged)
+      if (this.logged) return
       if (admin) {
         localStorage.setItem('admin', JSON.stringify(admin))
       } else {

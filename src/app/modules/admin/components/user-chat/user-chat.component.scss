@@ -1,0 +1,41 @@
+.chat-container {
+  height: 70vh;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 1px;
+}
+
+.user-list {
+  max-height: 100%;
+  overflow: auto;
+  width: 35%;
+  border-right: 3px solid #9d9d9d;
+}
+
+.user-list-item {
+  cursor: pointer;
+  border-bottom: 1px solid #cbc2c2;
+  padding: 10px 5px;
+}
+
+.user-list-item-selected {
+  background-color: #9d9d9d;
+}
+
+.user-messages {
+  width: 65%;
+  height: 100%;
+}
+
+.user-message {
+  height: 25%;
+}
+
+.messages-list {
+  height: 69%;
+}
+
+textarea {
+  resize: none;
+}

@@ -27,10 +27,10 @@ export class ChatService {
   }
 
 
-  createChat() {
+  createChat(userId?) {
     const data: Chat = {
       id: uuidv4(),
-      userId:this.userId,
+      userId: userId ? userId : this.userId,
       messages: []
     }
     return this.db.createChat(data)
@@ -38,5 +38,9 @@ export class ChatService {
 
   sendMessageFromUser(text) {
     return this.db.sendMessageFromUser(text, this.userId)
+  }
+
+  sendMessageFromAdmin(text, userId) {
+    return this.db.sendMessageFromAdmin(text, userId)
   }
 }
