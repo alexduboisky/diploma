@@ -29,19 +29,18 @@ export class StartAuthModalComponent {
     })
   }
 
-  submitData() {
+  async submitData() {
     const data = {
       id: uuidv4(),
       name: this.f.controls['name'].value,
       passCode: this.f.controls['passCode'].value
     }
-    this.auth.checkIsUserExist(data.passCode).subscribe((user: User[]) => {
-      if (user.length) return this.showErrorMessage()
-      this.auth.registerUser(data).subscribe((user: User[]) => {
-        this.auth.setUser(user[0])
-        this.activeModal.close();
-        this.router.navigate(['courses'])
-      })
+    const isUserExist = await this.auth.checkIsUserExist(data.passCode)
+    if (isUserExist) return this.showErrorMessage()
+    this.auth.registerUser(data).subscribe((user: User[]) => {
+      this.auth.setUser(user[0])
+      this.activeModal.close();
+      this.router.navigate(['courses'])
     })
   }
 

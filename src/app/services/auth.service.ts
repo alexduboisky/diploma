@@ -26,7 +26,6 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(user))
       } else {
         this.chat.userChat.next(null)
-        this.router.navigate([''])
         localStorage.removeItem('user')
       }
       this.logged = !!user
@@ -37,7 +36,6 @@ export class AuthService {
       if (admin) {
         localStorage.setItem('admin', JSON.stringify(admin))
       } else {
-        this.router.navigate([''])
         localStorage.removeItem('admin')
       }
       this.adminLogged = !!admin
@@ -69,7 +67,7 @@ export class AuthService {
     }
   }
 
-  checkIsUserExist(passCode: string): Observable<any> {
+  checkIsUserExist(passCode: string): Promise<boolean> {
     return this.db.checkIsUserExist(passCode)
   }
 
@@ -101,5 +99,6 @@ export class AuthService {
   logout(): void {
     this.User.next(null)
     this.Admin.next(null)
+    this.router.navigate([''])
   }
 }

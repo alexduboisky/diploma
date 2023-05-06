@@ -18,19 +18,25 @@ export class MainCoursesComponent implements OnInit{
   finishiedCourses: Course[] = []
 
   courseState = CourseState
+  user: User
 
   constructor(private db: DatabaseService, public auth: AuthService) {}
 
   async ngOnInit() {
-    await this.auth.updateUserData()
-    this.db.getCourses().subscribe((data: Course[]) => {
-      if (this.auth.logged) return this.processCourses(data)
-      this.courses = data
+    this.auth.User.subscribe(user => {
+      this.user = user
+      this.db.getCourses().subscribe((data: Course[]) => {
+        if (this.auth.logged) {
+          this.processCourses(data)
+          return
+        }
+        this.courses = data
+      })
     })
   }
 
-  private processCourses(data: Course[]) {
-    const coursesState = this.auth.User.getValue().coursesState || []
+  private async processCourses(data: Course[]) {
+    const coursesState = this.user.coursesState || []
     const userCourseStates = Object.values(coursesState)
     data.forEach(course => {
       const courseFromList = userCourseStates.find(el => el.id === course.id)
@@ -44,14 +50,15 @@ export class MainCoursesComponent implements OnInit{
           break
         }
         case CourseState.DONE: {
-          this.finishiedCourses.push({ ...courseFromList , ...course})
+          this.finishiedCourses.push({...courseFromList, ...course})
           break
         }
         case CourseState.IN_PROGRES: {
-          this.startedCourses.push({ ...courseFromList , ...course})
+          this.startedCourses.push({...courseFromList, ...course})
           break
         }
-        default: this.newCourses.push(course)
+        default:
+          this.newCourses.push(course)
       }
     })
   }

@@ -118,8 +118,13 @@ export class DatabaseService {
   }
 
   checkIsUserExist(passCode: string) {
-    const newUserRef = this.db.list('users', ref => ref.orderByChild('passCode').equalTo(passCode))
-    return newUserRef.valueChanges()
+    return new Promise<boolean>(resolve => {
+      const newUserRef = this.db.list('users', ref => ref.orderByChild('passCode').equalTo(passCode))
+      return newUserRef.valueChanges().subscribe(user => {
+        const isUserExist = !!(user && user.length && user[0])
+        resolve(isUserExist)
+      })
+    })
   }
 
   updateUserData(passCode:string = '') {
