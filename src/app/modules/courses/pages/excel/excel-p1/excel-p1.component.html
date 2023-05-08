@@ -1,0 +1,31 @@
+<div class="container d-flex flex-column mt-4">
+  <div>
+    <p class="h4">Задание</p>
+    <ul>
+      <li>Создайте таблицу «Сведения о студентах», состоящую из 6 строк и 5 столбцов.</li>
+      <li>Дайте название столбцам</li>
+      <li>Заполните ее следующими сведениями:
+        <ol>
+          <li>Иванов Иван Иванович, 11.04.1996,  ул. Климасенко, 13-15</li>
+          <li>Петрова Лидия Ивановна, 25.10.1997., пер. Черского, 32</li>
+          <li>Быков Алексей Ильич, 12.10.1998, ул. Кирова, 75-89</li>
+          <li>Мухин Олег Андреевич, 20.07.1995, ул. Центральная, 50-29</li>
+          <li>Григорьева Наталья Дмитриевна, 30.07.1995, ул. Батюшкова, 16-41</li>
+        </ol>
+      </li>
+      <li>Добавьте в таблицу еще 5 строк.</li>
+      <li>Заполните эти строки сведениями о своих знакомых.</li>
+      <li>Выполните выравнивание ячеек – по центру.</li>
+      <li>Для каждой строки задайте индивидуальный цвет шрифта.</li>
+    </ul>
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Файл для проверки</label>
+      <input class="form-control" type="file" id="formFile" (change)="handleFileInput($event.target.files)" accept=".xls, .xlsx">
+    </div>
+  </div>
+
+  <div class="course-buttons m-5">
+    <button class="btn btn-outline-success mx-2" (click)="prevLesson()">Предыдущий урок</button>
+    <button class="btn btn-outline-primary" [disabled]="!isFileUploaded" (click)="openTest()">Перейти к тесту</button>
+  </div>
+</div>

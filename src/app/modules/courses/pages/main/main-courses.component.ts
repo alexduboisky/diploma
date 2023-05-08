@@ -36,6 +36,9 @@ export class MainCoursesComponent implements OnInit{
   }
 
   private async processCourses(data: Course[]) {
+    this.startedCourses = []
+    this.finishiedCourses = []
+    this.newCourses = []
     const coursesState = this.user.coursesState || []
     const userCourseStates = Object.values(coursesState)
     data.forEach(course => {

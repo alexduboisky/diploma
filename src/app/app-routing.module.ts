@@ -15,6 +15,12 @@ import {WordP1Component} from "./modules/courses/pages/word/word-p1/word-p1.comp
 import {AuthGuard} from "./guards/auth.guard";
 import {AdminPanelComponent} from "./modules/admin/pages/admin-panel/admin-panel.component";
 import {AdminGuard} from "./guards/admin.guard";
+import {ExcelL1Component} from "./modules/courses/pages/excel/excel-l1/excel-l1.component";
+import {ExcelL2Component} from "./modules/courses/pages/excel/excel-l2/excel-l2.component";
+import {ExcelL3Component} from "./modules/courses/pages/excel/excel-l3/excel-l3.component";
+import {ExcelL4Component} from "./modules/courses/pages/excel/excel-l4/excel-l4.component";
+import {ExcelT1Component} from "./modules/courses/pages/excel/excel-t1/excel-t1.component";
+import {ExcelP1Component} from "./modules/courses/pages/excel/excel-p1/excel-p1.component";
 
 const routes: Routes = [
   {
@@ -74,6 +80,36 @@ const routes: Routes = [
       {
         path: 'courses/c4/p1',
         component: WordP1Component,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courses/c5/l1',
+        component: ExcelL1Component,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courses/c5/l2',
+        component: ExcelL2Component,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courses/c5/l3',
+        component: ExcelL3Component,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courses/c5/l4',
+        component: ExcelL4Component,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courses/c5/t1',
+        component: ExcelT1Component,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'courses/c5/p1',
+        component: ExcelP1Component,
         canActivate: [AuthGuard],
       },
       {

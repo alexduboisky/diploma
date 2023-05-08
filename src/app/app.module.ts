@@ -43,6 +43,12 @@ import { UserCoursesInfoComponent } from './modules/admin/components/user-course
 import { ChangePasscodeModalComponent } from './components/change-passcode-modal/change-passcode-modal.component';
 import { FeedbackComponent } from './modules/admin/components/feedback/feedback.component';
 import { PracticesComponent } from './modules/admin/components/practices/practices.component';
+import { ExcelL1Component } from './modules/courses/pages/excel/excel-l1/excel-l1.component';
+import { ExcelL2Component } from './modules/courses/pages/excel/excel-l2/excel-l2.component';
+import { ExcelL3Component } from './modules/courses/pages/excel/excel-l3/excel-l3.component';
+import { ExcelL4Component } from './modules/courses/pages/excel/excel-l4/excel-l4.component';
+import { ExcelT1Component } from './modules/courses/pages/excel/excel-t1/excel-t1.component';
+import { ExcelP1Component } from './modules/courses/pages/excel/excel-p1/excel-p1.component';
 
 
 @NgModule({
@@ -79,7 +85,13 @@ import { PracticesComponent } from './modules/admin/components/practices/practic
     UserCoursesInfoComponent,
     ChangePasscodeModalComponent,
     FeedbackComponent,
-    PracticesComponent
+    PracticesComponent,
+    ExcelL1Component,
+    ExcelL2Component,
+    ExcelL3Component,
+    ExcelL4Component,
+    ExcelT1Component,
+    ExcelP1Component
   ],
   imports: [
     BrowserModule,
