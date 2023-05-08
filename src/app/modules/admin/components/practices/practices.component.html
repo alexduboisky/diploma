@@ -1,7 +1,7 @@
 <div class="container">
   <div *ngIf="!practices.length" class="mt-5 h4 d-flex justify-content-center">Нет заданий для проверки</div>
   <div *ngIf="practices.length">
-    <div class="card" *ngFor="let user of practices">
+    <div class="card mt-3" *ngFor="let user of practices">
       <div class="card-header">
         {{user.userName}}
       </div>
